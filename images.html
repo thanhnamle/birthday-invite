@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mai Anh's Birthday Celebration</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fce4ec;
+            color: #333;
+            overflow-x: hidden;
+            /* Set aspect ratio to match 16:9 */
+            max-width: 100vw;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #e91e63;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #9c27b0;
+            margin-bottom: 15px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        /* Decorative Elements */
+        .decoration {
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .circle {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0.7;
+        }
+
+        .square {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            opacity: 0.7;
+            transform: rotate(45deg);
+        }
+
+        /* Countdown Timer Section */
+        .countdown-section {
+            margin: 15px 0 25px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+        }
+
+        .countdown-item {
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #c2185b;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #9c27b0;
+        }
+
+        /* Clickable Image Gallery Section - Optimized for 16:9 */
+        .gallery-section {
+            margin-bottom: 50px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            /* Set aspect ratio to 16:9 with padding trick */
+            padding-bottom: 56.25%; /* 9/16 = 0.5625 */
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .gallery-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-image.active {
+            opacity: 1;
+        }
+
+        .placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+        }
+
+        .placeholder i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .placeholder p {
+            font-size: 1rem;
+        }
+
+        .gallery-instruction {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 1rem;
+            color: #e91e63;
+        }
+
+        /* About Section */
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            animation: slideInRight 1s ease-out;
+        }
+
+        .about-content {
+            flex: 1;
+            padding: 15px;
+            min-width: 100%;
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #e91e63;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        /* Footer */
+        footer {
+            display: block;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f8bbd0;
+            color: #c2185b;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        @media screen and (max-width: 900px) {
+            footer {
+                margin-top: 275px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Floating Animation for Decorations */
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Fix for orientation changes */
+        @media (orientation: landscape) {
+            .gallery-container {
+                padding-bottom: 56.25%; /* Maintain 16:9 ratio */
+            }
+        }
+
+        /* Media query for smaller phones */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+
+            .countdown-label {
+                font-size: 0.7rem;
+            }
+
+            .countdown-item {
+                margin: 0 5px;
+            }
+
+            .about-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* NEW STYLES FOR PAGE TRANSITION */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ff1493;
+            z-index: 9999;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .page-transition.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .page-transition-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-family: 'Brush Script MT', cursive;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 1;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<!-- Page Transition Element -->
+<div class="page-transition">
+    <div class="page-transition-content">
+        Chuyển trang...
+        <div style="margin-top: 20px; font-size: 50px;">🎂✨</div>
+    </div>
+</div>
+
+<!-- Decorative elements -->
+<div id="decorations"></div>
+
+<div class="container">
+    <header>
+        <h1>Happy Birthday</h1>
+    </header>
+
+    <!-- Countdown Timer Section -->
+    <section class="countdown-section">
+        <div class="countdown-title">Countdown to selna's Birthday</div>
+        <div class="countdown-timer" id="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clickable Image Gallery Section - Optimized for 16:9 -->
+    <section class="gallery-section">
+        <div class="gallery-container" id="imageGallery">
+            <!-- Image gallery with real images -->
+            <div class="gallery-image active">
+                <img src="images/BEAR3224.jpg" alt="Birthday celebration image">
+            </div>
+            <div class="gallery-image">
+                <div class="placeholder">
+                    <img src="images/BEAR3237.jpg">
+                </div>
+            </div>
+            <div class="gallery-image">
+                <div class="placeholder">
+                    <img src="images/BEAR3199.jpg">
+                </div>
+            </div>
+            <div class="gallery-image">
+                <div class="placeholder">
+                    <img src="images/BEAR3269.jpg">
+                </div>
+            </div>
+            <div class="gallery-image">
+                <div class="placeholder">
+                    <img src="images/BEAR3401.jpg">
+                </div>
+            </div>
+        </div>
+        <p class="gallery-instruction">
+            <i class="fas fa-hand-pointer"></i> Tap to see how gorgeous she is 😍
+        </p>
+    </section>
+</div>
+
+<footer>
+    <p>Created with love for selna's special day</p>
+</footer>
+
+<script>
+    // Create decorative elements
+    document.addEventListener('DOMContentLoaded', function() {
+        // Generate random decorative elements
+        const decorationsContainer = document.getElementById('decorations');
+        const colors = ['#e91e63', '#9c27b0', '#f8bbd0', '#f48fb1', '#ce93d8'];
+
+        // Create fewer circles for mobile
+        for (let i = 0; i < 12; i++) {
+            const circle = document.createElement('div');
+            circle.classList.add('decoration', 'circle');
+
+            // Random position
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const size = Math.random() * 15 + 5;
+            const colorIndex = Math.floor(Math.random() * colors.length);
+
+            circle.style.top = `${top}vh`;
+            circle.style.left = `${left}vw`;
+            circle.style.width = `${size}px`;
+            circle.style.height = `${size}px`;
+            circle.style.backgroundColor = colors[colorIndex];
+
+            // Add floating animation with random delay
+            circle.classList.add('float-animation');
+            circle.style.animationDelay = `${Math.random() * 4}s`;
+
+            decorationsContainer.appendChild(circle);
+        }
+
+        // Create fewer squares for mobile
+        for (let i = 0; i < 8; i++) {
+            const square = document.createElement('div');
+            square.classList.add('decoration', 'square');
+
+            // Random position
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const size = Math.random() * 10 + 5;
+            const colorIndex = Math.floor(Math.random() * colors.length);
+            const rotation = Math.random() * 45;
+
+            square.style.top = `${top}vh`;
+            square.style.left = `${left}vw`;
+            square.style.width = `${size}px`;
+            square.style.height = `${size}px`;
+            square.style.backgroundColor = colors[colorIndex];
+            square.style.transform = `rotate(${rotation}deg)`;
+
+            // Add floating animation with random delay
+            square.classList.add('float-animation');
+            square.style.animationDelay = `${Math.random() * 4}s`;
+
+            decorationsContainer.appendChild(square);
+        }
+
+        // Clickable Image Gallery functionality
+        let currentImage = 0;
+        const images = document.querySelectorAll('.gallery-image');
+        const totalImages = images.length;
+        const redirectUrl = 'index.html'; // Replace with your actual redirect URL
+        const pageTransition = document.querySelector('.page-transition');
+
+        // Initialize gallery
+        function showImage(index) {
+            // Deactivate all images
+            images.forEach(image => image.classList.remove('active'));
+
+            // Activate current image
+            images[index].classList.add('active');
+
+            currentImage = index;
+        }
+
+        // Function to handle page transition
+        function initiateTransition() {
+            // Trigger the page transition
+            pageTransition.classList.add('active');
+
+            // Redirect after transition
+            setTimeout(() => {
+                window.location.href = redirectUrl;
+            }, 1500); // Matches the transition duration
+        }
+
+        // Add click event to gallery container
+        document.getElementById('imageGallery').addEventListener('click', function() {
+            currentImage = (currentImage + 1) % totalImages;
+            showImage(currentImage);
+
+            // If we've reached the last image, initiate transition
+            if (currentImage === totalImages - 1) {
+                setTimeout(initiateTransition, 500); // Small delay to see the last image
+            }
+        });
+
+        // Birthday countdown
+        // Set birthday date here (YYYY, MM-1, DD, HH, MM, SS)
+        // Month is 0-indexed (January is 0, December is 11)
+        const birthdayDate = new Date(2025, 4, 27, 0, 0, 0); // May 27, 2025
+
+        function updateCountdown() {
+            const now = new Date();
+            const difference = birthdayDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // Birthday has arrived
+                document.getElementById('countdown').innerHTML = '<h3>The big day is here!</h3>';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    });
+</script>
+</body>
+</html>
